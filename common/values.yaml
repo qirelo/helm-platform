@@ -1,0 +1,17 @@
+# Default values for common.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+labels:
+  app.kubernetes.io/managed-by: "helm"
+  team: "default"
+  environment: "dev"
+
+resources: {}
+
+securityContext:
+  runAsUser: 1000
+  runAsGroup: 3000
+  fsGroup: 2000
