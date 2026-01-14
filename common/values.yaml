@@ -4,10 +4,11 @@
 
 replicaCount: 1
 
-labels:
-  app.kubernetes.io/managed-by: "helm"
-  team: "default"
-  environment: "dev"
+common:
+  labels:
+    app.kubernetes.io/managed-by: "helm"
+    team: "default"
+    environment: "dev"
 
 resources: {}
 
