@@ -1,0 +1,13 @@
+enabled: false
+
+className: nginx
+
+annotations: {}
+
+hosts:
+  - host: example.com
+    paths:
+      - path: /
+        pathType: Prefix
+
+tls: []
