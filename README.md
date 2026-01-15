@@ -1,12 +1,14 @@
 <div align="center">
+    <img src="docs/icon.png" width="80px" heigth="80px" />
+</div>
+
+<div align="center">
     <img src="docs/helm.png" width="80px" heigth="80px" />
-    <p>Helm Platform</p>
+    <h3>Helm Platform</h3>
 </div>
 
 <div align="justify">
-A lightweight and opinionated Helm platform foundation for building Kubernetes applications using library charts and composition.
-
-This project helps teams standardize Kubernetes deployments while keeping application charts simple, explicit, and maintainable.
+A lightweight and opinionated Helm platform foundation for building Kubernetes applications using library charts and composition. This project helps teams standardize Kubernetes deployments while keeping application charts simple, explicit, and maintainable.
 </div>
 
 ### Who Is This For ?
@@ -36,30 +38,81 @@ helm-platform/
 ├── common/        # Core library chart (mandatory)
 ├── service/       # Library chart for Kubernetes Services
 ├── ingress/       # Library chart for HTTP/HTTPS exposure
-└── apps/          # Application charts (examples or real apps)
+└── ...
 ```
 
-### Application Charts
+### Usage
 
-- live under ```apps/```
+This project provides Helm library charts published as OCI artifacts on GitHub Container Registry (GHCR).
+They are designed to be consumed as dependencies by application charts.
 
-- are deployable ```(type: application)```
+- Adding a Dependency
 
-- compose library charts explicitly
+To use a library chart (for example common), declare it in your application chart’s Chart.yaml:
 
-Example:
+```yaml
+dependencies:
+  - name: common
+    version: 0.1.0
+    repository: oci://ghcr.io/qirelo
+```
+
+Fetching Dependencies
+
+```bash
+helm dependency update
+```
+
+Using the Library Templates. Library charts expose reusable templates via define / include.
+
 
 ```yaml
 {{ include "common.deployment" . }}
-{{ include "service.service" . }}
-{{ include "ingress.ingress" . }}
 ```
 
-Nothing is generated unless it is explicitly included.
-
-### Getting Started
+Rendering and Installing
 
 ```bash
-helm dependency update apps/my-app
-helm template apps/my-app
+helm template my-app .
+helm install my-app .
+```
+
+### Releasing a chart (Development)
+
+Each chart is released independently using Git tags.
+
+The [release-chart.yaml](.github/workflows/release-chart.yaml)
+ workflow automatically packages and publishes a chart to the OCI registry when a release tag is pushed.
+
+From the ```helm-platform``` repository root:
+
+1. Create a release tag
+
+```bash
+git tag <chart-name>-v<version>
+```
+
+Example
+
+```bash
+git tag common-v0.1.0
+```
+
+Where:
+
+```html
+<chart-name> is the chart directory name (e.g. common)
+<version> is the chart version to release (e.g. 0.1.0)
+```
+
+2. Push the tag
+
+```bash
+git push origin <chart-name>-v<version>  
+```
+
+Example
+
+```bash
+git push origin common-v0.1.0
 ```
