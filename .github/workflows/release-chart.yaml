@@ -38,6 +38,10 @@ jobs:
             echo "Chart directory not found"
             exit 1
           fi
+      
+      - name: Helm lint
+        run: |
+          helm lint ${{ steps.parse.outputs.chart }}
 
       - name: Update chart version
         run: |
