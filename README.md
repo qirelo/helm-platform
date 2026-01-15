@@ -4,6 +4,7 @@
 
 <div align="center">
     <img src="docs/helm.png" width="80px" heigth="80px" />
+    <img src="docs/kubernetes.png" width="100px" heigth="100px" />
     <h3>Helm Platform</h3>
 </div>
 
