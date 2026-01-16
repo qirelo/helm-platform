@@ -120,6 +120,4 @@ git push origin common-v0.1.0
 
 ### Documentations
 
-| Library | Documentation |
-|:-------- |--------:|
-| Common     | [common.md](docs/common.md)   |
+- [Common](docs/common.md)
