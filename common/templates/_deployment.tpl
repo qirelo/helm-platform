@@ -14,20 +14,59 @@ spec:
     metadata:
       labels:
         {{- include "common.labels" . | nindent 8 }}
-    spec:
-      {{- if .Values.securityContext }}
-      securityContext:
-        runAsUser: {{ .Values.securityContext.runAsUser }}
-        runAsGroup: {{ .Values.securityContext.runAsGroup }}
-        fsGroup: {{ .Values.securityContext.fsGroup }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
       {{- end }}
+    spec:
+      securityContext:
+        {{- include "common.securityContext" . | nindent 8 }}
+
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
       containers:
         - name: {{ .Release.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: "{{ required "image.repository is required" .Values.image.repository }}:{{ required "image.tag is required" .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy | default "IfNotPresent" }}
-          {{- if .Values.common.resources }}
-          resources:
-            {{- toYaml .Values.common.resources | nindent 12 }}
+
+          securityContext:
+            {{- include "common.containerSecurityContext" . | nindent 12 }}
+
+          {{- with .Values.probes }}
+            {{- with .liveness }}
+          livenessProbe:
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+
+            {{- with .readiness }}
+          readinessProbe:
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+
+            {{- with .startup }}
+          startupProbe:
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
           {{- end }}
-            
+
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
 {{- end }}

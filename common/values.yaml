@@ -1,18 +1,31 @@
-# Default values for common.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
 replicaCount: 1
 
-common:
-  labels:
-    app.kubernetes.io/managed-by: "helm"
-    team: "default"
-    environment: "dev"
-
-resources: {}
+image:
+  repository: ""
+  tag: ""
+  pullPolicy: IfNotPresent
 
 securityContext:
+  runAsNonRoot: true
   runAsUser: 1000
-  runAsGroup: 3000
+  runAsGroup: 1000
   fsGroup: 2000
+  seccompProfile:
+    type: RuntimeDefault
+
+containerSecurityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  privileged: false
+  capabilities:
+    drop:
+      - ALL
+
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+podAnnotations: {}
+podLabels: {}
+probes: {}
