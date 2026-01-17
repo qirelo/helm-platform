@@ -40,6 +40,11 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
 
+      {{- with .Values.volumes }}
+      volumes:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
       containers:
         - name: {{ .Release.Name }}
           image: "{{ required "image.repository is required" .Values.image.repository }}:{{ required "image.tag is required" .Values.image.tag }}"
@@ -47,6 +52,16 @@ spec:
 
           securityContext:
             {{- include "common.containerSecurityContext" . | nindent 12 }}
+
+          {{- with .Values.envFrom }}
+          envFrom:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
+          {{- with .Values.env }}
+          env:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
 
           {{- with .Values.probes }}
             {{- with .liveness }}
@@ -63,6 +78,11 @@ spec:
           startupProbe:
             {{- toYaml . | nindent 12 }}
             {{- end }}
+          {{- end }}
+
+          {{- with .Values.volumeMounts }}
+          volumeMounts:
+            {{- toYaml . | nindent 12 }}
           {{- end }}
 
           {{- with .Values.resources }}

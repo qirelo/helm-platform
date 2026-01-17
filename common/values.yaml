@@ -1,31 +1,30 @@
 replicaCount: 1
 
 image:
-  repository: ""
-  tag: ""
+  repository: ""   # required
+  tag: ""          # required
   pullPolicy: IfNotPresent
 
-securityContext:
-  runAsNonRoot: true
-  runAsUser: 1000
-  runAsGroup: 1000
-  fsGroup: 2000
-  seccompProfile:
-    type: RuntimeDefault
+securityContext: {}
 
-containerSecurityContext:
-  allowPrivilegeEscalation: false
-  readOnlyRootFilesystem: true
-  privileged: false
-  capabilities:
-    drop:
-      - ALL
+containerSecurityContext: {}
 
 resources: {}
+
 nodeSelector: {}
 tolerations: []
 affinity: {}
 
 podAnnotations: {}
 podLabels: {}
-probes: {}
+
+probes:
+  liveness: {}
+  readiness: {}
+  startup: {}
+
+env: []
+envFrom: []
+
+volumes: []
+volumeMounts: []
