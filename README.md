@@ -8,6 +8,15 @@
     <h3>Helm Platform</h3>
 </div>
 
+<div align="center">
+  <a href="mailto:dev@qirelo.com">
+    <img src="https://img.shields.io/badge/Maintainer-dev%40qirelo.com-ffdc00?logo=gmail&logoColor=black" alt="Email Maintainer">
+  </a>
+  <br>
+  <br>
+</div>
+
+
 <div align="justify">
 A lightweight and opinionated Helm platform foundation for building Kubernetes applications using library charts and composition. This project helps teams standardize Kubernetes deployments while keeping application charts simple, explicit, and maintainable.
 </div>
@@ -121,3 +130,10 @@ git push origin common-v0.1.0
 ### Documentations
 
 - [Common](docs/common.md)
+
+
+<div align="center">
+    <br>
+    <br>
+    <div style="background-color: #ffdc00; height: 3px"></div>
+</div>
