@@ -142,5 +142,5 @@ git push origin common-v0.1.0
 <div align="center">
     <br>
     <br>
-    <div style="background-color: #ffdc00; height: 10px"></div>
+    Made with ❤️ and open source.
 </div>
