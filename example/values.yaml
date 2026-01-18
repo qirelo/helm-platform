@@ -2,7 +2,11 @@ image:
   repository: nginx
   tag: "1.25"
 
-
+podLabels:
+  environement: prod
+  tier: frontent
+  customer: qirelo
+  
 securityContext:
   runAsUser: 2000
 
