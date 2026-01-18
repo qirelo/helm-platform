@@ -1,4 +1,11 @@
+{{- define "ingress.name" -}}
+{{ .Release.Name }}
+{{- end -}}
+
+
 {{- define "ingress.labels" -}}
-app.kubernetes.io/name: {{ .Release.Name }}
-app.kubernetes.io/instance: {{ .Release.Name }}
-{{- end }}
+{{- include "common.labels" . -}}
+{{- with .Values.ingress.labels }}
+{{- toYaml . }}
+{{- end -}}
+{{- end -}}

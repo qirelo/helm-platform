@@ -1,13 +1,9 @@
-enabled: false
+ingress:
+  enabled: false
 
-className: nginx
+  ingressClassName: ""
+  annotations: {}
+  labels: {}
 
-annotations: {}
-
-hosts:
-  - host: example.com
-    paths:
-      - path: /
-        pathType: Prefix
-
-tls: []
+  hosts: []
+  tls: []
