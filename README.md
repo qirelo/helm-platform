@@ -87,6 +87,17 @@ helm template my-app .
 helm install my-app .
 ```
 
+### Example Application
+
+The [example repository](/example/) includes a complete example application demonstrating how to compose the library charts together.
+
+### Documentations
+
+- [Common](docs/common.md)
+- [Service](docs/service.md)
+- [Ingress](docs/ingress.md)
+
+
 ### Releasing a chart (Development)
 
 Each chart is released independently using Git tags.
@@ -127,15 +138,9 @@ Example
 git push origin common-v0.1.0
 ```
 
-### Documentations
-
-- [Common](docs/common.md)
-- [Service](docs/service.md)
-- [Ingress](docs/ingress.md)
-
 
 <div align="center">
     <br>
     <br>
-    <div style="background-color: #ffdc00; height: 3px"></div>
+    <div style="background-color: #ffdc00; height: 10px"></div>
 </div>

@@ -1,0 +1,45 @@
+image:
+  repository: nginx
+  tag: "1.25"
+
+
+securityContext:
+  runAsUser: 2000
+
+resources:
+  limits:
+    cpu: "500m"
+    memory: "256Mi"
+
+
+service:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 8080
+      nodePort: 30080
+
+  labels:
+    app.kubernetes.io/component: backend
+    app.kubernetes.io/part-of: my-platform
+    monitoring: enabled
+
+
+ingress:
+  enabled: true
+  ingressClassName: nginx
+
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+
+  hosts:
+    - host: my-app.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+          servicePort: 80
+
+  tls:
+    - hosts:
+        - my-app.example.com
+      secretName: my-app-tls
