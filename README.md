@@ -18,7 +18,7 @@
 
 
 <div align="justify">
-A lightweight and opinionated Helm platform foundation for building Kubernetes applications using library charts and composition. This project helps teams standardize Kubernetes deployments while keeping application charts simple, explicit, and maintainable.
+A lightweight and opinionated Helm platform foundation for building Kubernetes applications using library charts and composition. This project helps teams standardize Kubernetes deployments, services, ingress, ... while keeping application charts simple, explicit, and maintainable.
 </div>
 
 ### Who Is This For ?
