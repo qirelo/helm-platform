@@ -22,6 +22,16 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
     spec:
+
+      {{- with .Values.serviceAccountName }}
+      serviceAccountName: {{ . }}
+      {{- end }}
+
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    
       securityContext:
         {{- include "common.securityContext" . | nindent 8 }}
 

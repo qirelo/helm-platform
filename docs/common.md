@@ -34,6 +34,10 @@ image:
   tag: string (required)
   pullPolicy: string
 
+serviceAccountName: string | null
+imagePullSecrets:
+  - name: string
+
 resources: {}
 
 podLabels: {}
@@ -45,6 +49,12 @@ tolerations: []
 
 securityContext: {}
 containerSecurityContext: {}
+
+env: []
+envFrom: []
+
+volumes: []
+volumeMounts: []
 
 probes:
   liveness: {}
