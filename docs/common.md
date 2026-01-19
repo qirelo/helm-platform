@@ -27,6 +27,11 @@ dependencies:
 Main supported values (non-exhaustive)
 
 ```yaml
+### List of fields
+
+Main supported values (non-exhaustive)
+
+```yaml
 replicaCount: int
 
 image:
@@ -63,4 +68,6 @@ probes:
   readiness: {}
   startup: {}
 
+command: []
+args: []
 ```

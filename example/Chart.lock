@@ -1,12 +1,12 @@
 dependencies:
 - name: common
   repository: oci://ghcr.io/qirelo
-  version: 0.2.2
+  version: 0.2.4
 - name: service
   repository: oci://ghcr.io/qirelo
   version: 0.1.0
 - name: ingress
   repository: oci://ghcr.io/qirelo
   version: 0.1.0
-digest: sha256:63d35a5877917d41cf28f82028b000f3c3daaae966ffb9cfed1846aa8eb85c82
-generated: "2026-01-18T17:38:45.514426504+01:00"
+digest: sha256:99c8b0a60a080546f5b0e565bf19ca3b43f120344e4797423eb5913e0bcd6213
+generated: "2026-01-19T11:24:27.090542911+01:00"

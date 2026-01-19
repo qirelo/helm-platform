@@ -63,7 +63,7 @@ To use a library chart (for example common), declare it in your application char
 ```yaml
 dependencies:
   - name: common
-    version: 0.2.4
+    version: 0.2.5
     repository: oci://ghcr.io/qirelo
 ```
 
