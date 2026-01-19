@@ -31,7 +31,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-    
+
       securityContext:
         {{- include "common.securityContext" . | nindent 8 }}
 
@@ -59,6 +59,11 @@ spec:
         - name: {{ .Release.Name }}
           image: "{{ required "image.repository is required" .Values.image.repository }}:{{ required "image.tag is required" .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy | default "IfNotPresent" }}
+
+          {{- with .Values.ports }}
+          ports:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
 
           securityContext:
             {{- include "common.containerSecurityContext" . | nindent 12 }}

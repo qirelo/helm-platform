@@ -17,7 +17,7 @@ Include
 # Append this in application Chart.yaml
 dependencies:
   - name: common
-    version: 0.2.0
+    version: 0.2.4
     repository: oci://ghcr.io/qirelo
 ```
 
@@ -37,6 +37,8 @@ image:
 serviceAccountName: string | null
 imagePullSecrets:
   - name: string
+
+ports: []
 
 resources: {}
 
@@ -60,4 +62,5 @@ probes:
   liveness: {}
   readiness: {}
   startup: {}
+
 ```
