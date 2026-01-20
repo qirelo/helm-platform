@@ -2,8 +2,8 @@ common:
   replicaCount: 1
 
   image:
-    repository: ""   # required
-    tag: ""          # required
+    repository: "nginx"   # required
+    tag: "0.1"          # required
     pullPolicy: IfNotPresent
 
   securityContext: {}

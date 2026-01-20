@@ -13,7 +13,7 @@ spec:
 
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ .Release.Name }}
+      {{- include "common.selectorLabels" . | nindent 6 }}
 
   template:
     metadata:
@@ -98,12 +98,10 @@ spec:
           livenessProbe:
             {{- toYaml . | nindent 12 }}
             {{- end }}
-
             {{- with .readiness }}
           readinessProbe:
             {{- toYaml . | nindent 12 }}
             {{- end }}
-
             {{- with .startup }}
           startupProbe:
             {{- toYaml . | nindent 12 }}
