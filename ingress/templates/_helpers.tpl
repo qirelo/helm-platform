@@ -4,8 +4,7 @@
 
 
 {{- define "ingress.labels" -}}
-{{- include "common.labels" . -}}
 {{- with .Values.ingress.labels }}
-{{- toYaml . }}
+{{- toYaml . -}}
 {{- end -}}
 {{- end -}}

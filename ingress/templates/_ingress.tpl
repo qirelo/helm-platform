@@ -5,7 +5,10 @@ kind: Ingress
 metadata:
   name: {{ include "ingress.name" . }}
   labels:
-    {{- include "ingress.labels" . | nindent 4 }}
+    {{- include "common.labels" . | nindent 4 }}
+    {{- with .Values.ingress.labels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
   {{- with .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}

@@ -17,3 +17,17 @@ type: library
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
 version: 0.1.0
 icon: https://www.qirelo.com/logo.png
+
+
+dependencies:
+  - name: common
+    version: 0.3.0
+    repository: oci://ghcr.io/qirelo
+  
+  - name: service
+    version: 0.1.0
+    repository: oci://ghcr.io/qirelo
+
+  - name: ingress
+    version: 0.1.0
+    repository: oci://ghcr.io/qirelo
