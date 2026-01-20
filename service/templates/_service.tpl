@@ -24,7 +24,11 @@ spec:
   externalName: {{ required "service.externalName is required for ExternalName services" .externalName }}
   {{- else }}
   selector:
-    {{- include "service.selector" $ | nindent 4 }}
+    {{- if .selector }}
+    {{- toYaml .selector | nindent 4 }}
+    {{- else }}
+    {{- include "common.selectorLabels" $ | nindent 4 }}
+    {{- end }}
   {{- end }}
 
   {{- if not .ports }}

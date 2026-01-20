@@ -15,6 +15,6 @@
 {{- if .Values.service.selector }}
 {{- toYaml .Values.service.selector -}}
 {{- else }}
-app.kubernetes.io/name: {{ .Release.Name }}
+{{- include "common.selectorLabels" . -}}
 {{- end -}}
 {{- end -}}
