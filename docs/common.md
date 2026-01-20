@@ -7,8 +7,6 @@ It is designed to be **generic, non-opinionated, and safe by default**, suitable
 
 The library does **not deploy resources by itself**. It must be consumed by an application chart via `include`.
 
----
-
 ### Usage
 
 Include
@@ -21,53 +19,49 @@ dependencies:
     repository: oci://ghcr.io/qirelo
 ```
 
-
 ### List of fields
 
 Main supported values (non-exhaustive)
 
 ```yaml
-### List of fields
+common:
+  replicaCount: int
 
-Main supported values (non-exhaustive)
+  image:
+    repository: string (required)
+    tag: string (required)
+    pullPolicy: string
 
-```yaml
-replicaCount: int
+  serviceAccountName: string | null
 
-image:
-  repository: string (required)
-  tag: string (required)
-  pullPolicy: string
+  imagePullSecrets:
+    - name: string
 
-serviceAccountName: string | null
-imagePullSecrets:
-  - name: string
+  ports: []
 
-ports: []
+  resources: {}
 
-resources: {}
+  podLabels: {}
+  podAnnotations: {}
 
-podLabels: {}
-podAnnotations: {}
+  nodeSelector: {}
+  affinity: {}
+  tolerations: []
 
-nodeSelector: {}
-affinity: {}
-tolerations: []
+  securityContext: {}
+  containerSecurityContext: {}
 
-securityContext: {}
-containerSecurityContext: {}
+  env: []
+  envFrom: []
 
-env: []
-envFrom: []
+  volumes: []
+  volumeMounts: []
 
-volumes: []
-volumeMounts: []
+  probes:
+    liveness: {}
+    readiness: {}
+    startup: {}
 
-probes:
-  liveness: {}
-  readiness: {}
-  startup: {}
-
-command: []
-args: []
+  command: []
+  args: []
 ```

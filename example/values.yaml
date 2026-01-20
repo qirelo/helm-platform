@@ -1,20 +1,20 @@
-image:
-  repository: nginx
-  tag: "1.25"
+common:
+  image:
+    repository: nginx
+    tag: "1.25"
 
-podLabels:
-  environement: prod
-  tier: frontent
-  customer: qirelo
-  
-securityContext:
-  runAsUser: 2000
+  podLabels:
+    environement: prod
+    tier: frontent
+    customer: qirelo
 
-resources:
-  limits:
-    cpu: "500m"
-    memory: "256Mi"
+  securityContext:
+    runAsUser: 2000
 
+  resources:
+    limits:
+      cpu: "500m"
+      memory: "256Mi"
 
 service:
   type: NodePort
@@ -27,7 +27,6 @@ service:
     app.kubernetes.io/component: backend
     app.kubernetes.io/part-of: my-platform
     monitoring: enabled
-
 
 ingress:
   enabled: true

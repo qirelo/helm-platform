@@ -1,33 +1,38 @@
 {{- define "common.deployment" -}}
+{{- $common := .Values.common | default dict -}}
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}
   labels:
     {{- include "common.labels" . | nindent 4 }}
+
 spec:
-  replicas: {{ .Values.replicaCount | default 1 }}
+  replicas: {{ $common.replicaCount | default 1 }}
+
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ .Release.Name }}
+
   template:
     metadata:
       labels:
         {{- include "common.labels" . | nindent 8 }}
-        {{- with .Values.podLabels }}
+        {{- with $common.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-      {{- with .Values.podAnnotations }}
+      {{- with $common.podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-    spec:
 
-      {{- with .Values.serviceAccountName }}
+    spec:
+      {{- with $common.serviceAccountName }}
       serviceAccountName: {{ . }}
       {{- end }}
 
-      {{- with .Values.imagePullSecrets }}
+      {{- with $common.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
@@ -35,42 +40,42 @@ spec:
       securityContext:
         {{- include "common.securityContext" . | nindent 8 }}
 
-      {{- with .Values.nodeSelector }}
+      {{- with $common.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
 
-      {{- with .Values.affinity }}
+      {{- with $common.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
 
-      {{- with .Values.tolerations }}
+      {{- with $common.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
 
-      {{- with .Values.volumes }}
+      {{- with $common.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}
       {{- end }}
 
       containers:
         - name: {{ .Release.Name }}
-          image: "{{ required "image.repository is required" .Values.image.repository }}:{{ required "image.tag is required" .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy | default "IfNotPresent" }}
+          image: "{{ required "common.image.repository is required" $common.image.repository }}:{{ required "common.image.tag is required" $common.image.tag }}"
+          imagePullPolicy: {{ $common.image.pullPolicy | default "IfNotPresent" }}
 
-          {{- with .Values.command }}
+          {{- with $common.command }}
           command:
             {{- toYaml . | nindent 12 }}
           {{- end }}
 
-          {{- with .Values.args }}
+          {{- with $common.args }}
           args:
             {{- toYaml . | nindent 12 }}
           {{- end }}
 
-          {{- with .Values.ports }}
+          {{- with $common.ports }}
           ports:
             {{- toYaml . | nindent 12 }}
           {{- end }}
@@ -78,17 +83,17 @@ spec:
           securityContext:
             {{- include "common.containerSecurityContext" . | nindent 12 }}
 
-          {{- with .Values.envFrom }}
+          {{- with $common.envFrom }}
           envFrom:
             {{- toYaml . | nindent 12 }}
           {{- end }}
 
-          {{- with .Values.env }}
+          {{- with $common.env }}
           env:
             {{- toYaml . | nindent 12 }}
           {{- end }}
 
-          {{- with .Values.probes }}
+          {{- with $common.probes }}
             {{- with .liveness }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}
@@ -105,12 +110,12 @@ spec:
             {{- end }}
           {{- end }}
 
-          {{- with .Values.volumeMounts }}
+          {{- with $common.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}
           {{- end }}
 
-          {{- with .Values.resources }}
+          {{- with $common.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
