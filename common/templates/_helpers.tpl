@@ -19,8 +19,12 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
   "fsGroup" 2000
   "seccompProfile" (dict "type" "RuntimeDefault")
 -}}
-{{- $user := .Values.common.securityContext | default dict -}}
-{{- toYaml (merge $defaults $user) -}}
+{{- $common := $.Values.common | default dict -}}
+{{- if hasKey $common "securityContext" -}}
+{{- toYaml $common.securityContext -}}
+{{- else -}}
+{{- toYaml $defaults -}}
+{{- end -}}
 {{- end -}}
 
 
@@ -31,6 +35,10 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
   "privileged" false
   "capabilities" (dict "drop" (list "ALL"))
 -}}
-{{- $user := .Values.common.containerSecurityContext | default dict -}}
-{{- toYaml (merge $defaults $user) -}}
+{{- $common := $.Values.common | default dict -}}
+{{- if hasKey $common "containerSecurityContext" -}}
+{{- toYaml $common.containerSecurityContext -}}
+{{- else -}}
+{{- toYaml $defaults -}}
+{{- end -}}
 {{- end -}}
